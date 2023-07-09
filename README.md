@@ -2,6 +2,16 @@
 
 ## Run steps:
 
-docker build . -t codehq/n4l-be
+1: Install Docker
 
-docker run -d -p 3000:3000 --name n4l-be codehq/n4l-be
+2: Run docker command: `docker compose up -d`
+
+## Configuration
+1: MongoDB Connection String: `mongodb://codehq:codehq@localhost:27017/?authSource=admin`
+
+2: RabbitMQ Management: `localhost:15672` (username: codehq, pass: codehq)
+
+3: Containers:
+  - n4l-be: `localhost:3000`
+  - mongodb: `localhost:27017` (please use connection string for GUI)
+  - rabbitmq: `localhost:5672`

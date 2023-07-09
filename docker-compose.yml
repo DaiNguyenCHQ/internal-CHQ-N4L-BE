@@ -1,0 +1,31 @@
+version: "3.2"
+
+services:
+  n4l-be:
+    build: .
+    container_name: n4l-be
+    ports:
+      - "3000:3000"
+
+  mongodb:
+    image: "mongo:6.0.7"
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=codehq
+      - MONGO_INITDB_ROOT_PASSWORD=codehq
+
+  rabbitmq:
+    image: "rabbitmq:3.12.1-management"
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=codehq
+      - RABBITMQ_DEFAULT_PASS=codehq
+
+networks:
+  default:
+    driver: bridge
