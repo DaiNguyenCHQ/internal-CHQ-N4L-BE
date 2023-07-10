@@ -15,3 +15,8 @@
   - n4l-be: `localhost:3000`
   - mongodb: `localhost:27017` (please use connection string for GUI)
   - rabbitmq: `localhost:5672`
+
+4. checkout source code
+  - run: `npm i`
+  - run `tsc`
+  - run `npm run start`
