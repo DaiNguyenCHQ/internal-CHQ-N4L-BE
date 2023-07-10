@@ -4,7 +4,9 @@
 
 1: Install Docker
 
-2: Run docker command: `docker compose up -d`
+2: Run docker command: `docker compose build --no-cache`
+
+3: Run docker command: `docker compose up -d`
 
 ## Configuration
 1: MongoDB Connection String: `mongodb://codehq:codehq@localhost:27017/?authSource=admin`
