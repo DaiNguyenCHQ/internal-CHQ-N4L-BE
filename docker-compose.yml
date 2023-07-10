@@ -5,7 +5,7 @@ services:
     build: .
     container_name: n4l-be
     ports:
-      - "3000:3000"
+      - "3001:3001"
 
   mongodb:
     image: "mongo:6.0.7"
