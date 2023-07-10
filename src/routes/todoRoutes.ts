@@ -12,8 +12,8 @@ export const todoRoutes = (todoService: TodoService): express.Router => {
 
   router.post("/todos", async (req: Request, res: Response) => {
     console.log("POST - TODO", { body: req.body });
-    const { title, completed } = req.body;
-    const todo = await todoService.createTodo(title, completed);
+    const { title, status } = req.body;
+    const todo = await todoService.createTodo(title, status);
     res.json(todo);
   });
 
@@ -38,7 +38,7 @@ export const todoRoutes = (todoService: TodoService): express.Router => {
     if (!todo) {
       return null;
     }
-    return await todoService.updateTodo(id, { ...todo, completed: true});
+    return await todoService.updateTodo(id, { ...todo, status: "completed"});
   });
 
   return router;
