@@ -6,6 +6,8 @@ services:
     container_name: n4l-be
     ports:
       - "3001:3001"
+    environment:
+      - MONGODB_URI=mongodb://codehq:codehq@mongodb:27017/todo-app?authSource=admin&w=1
 
   mongodb:
     image: "mongo:6.0.7"
