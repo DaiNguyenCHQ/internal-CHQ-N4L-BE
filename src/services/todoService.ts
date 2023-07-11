@@ -72,12 +72,12 @@ export class TodoService {
     }
   }
 
-  public async getTodosByStatus(status: string): Promise<Todo[]> {
+  public async deleteCompltedTodos(): Promise<boolean> {
     try {
-      const todos = await TodoModel.find({ status }).lean();
-      return todos;
+      await TodoModel.deleteMany({ status: "completed"});
+      return true;
     } catch (error) {
-      throw new Error('Failed to get all todo by status');
+      throw new Error('Failed deleteCompltedTodos');
     }
   }
 }
