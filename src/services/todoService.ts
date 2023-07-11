@@ -20,12 +20,35 @@ export class TodoService {
     }
   }
 
-  public async updateTodo(id: string, todo: Todo): Promise<Todo | null> {
+  public async updateTodo(
+    id: string,
+    todo: Partial<Todo>
+  ): Promise<Todo | null> {
     try {
       const updatedTodo = await TodoModel.findByIdAndUpdate(id, todo, {
         new: true,
       });
       return updatedTodo;
+    } catch (error) {
+      throw new Error('Failed to update todo');
+    }
+  }
+
+  public async bulkUpdateTodoStatus(status: string): Promise<boolean | null> {
+    try {
+      const updatedTodos = await TodoModel.updateMany(
+        {},
+        { status },
+        {
+          multi: true,
+        }
+      );
+
+      if (!updatedTodos) {
+        return false;
+      }
+
+      return true;
     } catch (error) {
       throw new Error('Failed to update todo');
     }

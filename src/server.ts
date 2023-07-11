@@ -12,6 +12,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3001;
 
+logger.info(process.env, "environment");
+
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN || 'http://ui.chatapp.local',

@@ -32,6 +32,23 @@ export const todoRoutes = (todoService: TodoService): express.Router => {
     }
   );
 
+  router.patch(
+    '/todos/bulk-update-status',
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        logger.info({ body: req.body }, 'PATCH - TODO');
+        const { status } = req.body;
+        if (!status || (status !== 'active' && status !== 'completed')) {
+          logger.info('invalid status');
+        }
+        const updatedAllTodos = await todoService.bulkUpdateTodoStatus(status);
+        res.json(updatedAllTodos);
+      } catch (error) {
+        next(error);
+      }
+    }
+  );
+
   router.delete(
     '/todos/clear',
     async (req: Request, res: Response, next: NextFunction) => {
