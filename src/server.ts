@@ -16,7 +16,7 @@ logger.info(process.env, "environment");
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:4200',
+    origin: [process.env.CORS_ORIGIN || 'http://localhost:4200', "http://ui.todo.com"]
   })
 );
 

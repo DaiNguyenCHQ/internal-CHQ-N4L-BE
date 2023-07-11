@@ -1,5 +1,15 @@
 # internal-CHQ-N4L-BE
 
+# setup traefik
+1. go to c/Windows/system32/drivers/etc add these line of subdomain:
+  
+  127.0.0.1 ui.todo.com
+  127.0.0.1 api.todo.com
+
+2. go to traefik directory
+  - run `docker create network web` to init traefik network
+  - run `docker-compose up -d` to init traefik
+
 ## Run steps:
 
 1: Install Docker
@@ -26,3 +36,8 @@
 5. NOTE FOR DEV:
   - `docker compose up -d mongodb rabbitmq` to start these dependency services
   - on source code: run `npm i` then `npm run dev`
+
+6.
+  - frontend will be exposed on domain: http://ui.todo.com
+  - backend will be exposed on domain: http://api.todo.com
+

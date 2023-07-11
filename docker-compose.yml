@@ -1,6 +1,23 @@
 version: "3.2"
 
 services:
+  n4l-fe:
+    build:
+      context: ../internal-CHQ-N4L/
+      dockerfile: Dockerfile
+    container_name: n4l-fe
+    networks:
+      - web
+    # Here we define our settings for traefik how to proxy our service.
+    labels:
+      # This is enableing treafik to proxy this service
+      - "traefik.enable=true"
+      # Here we have to define the URL
+      - "traefik.http.routers.n4lfe.rule=Host(`ui.todo.com`)"
+      # Here we are defining wich entrypoint should be used by clients to access this service
+      - "traefik.http.routers.n4lfe.entrypoints=web"
+      # Here we define in wich network treafik can find this service
+      - "traefik.docker.network=web"
   n4l-be:
     build: .
     container_name: n4l-be
@@ -10,6 +27,19 @@ services:
       - MONGODB_URI=mongodb://codehq:codehq@mongodb:27017/todo-app?authSource=admin&w=1
       - PORT = "3001"
       - CORS_ORIGIN = "http://localhost:4200"
+    networks:
+      - web
+    labels:
+      # This is enableing treafik to proxy this service
+      - "traefik.enable=true"
+      # Here we have to define the URL
+      - "traefik.http.routers.n4lbe.rule=Host(`api.todo.com`)"
+      # Here we are defining wich entrypoint should be used by clients to access this service
+      - "traefik.http.routers.n4lbe.entrypoints=web"
+      # Here we define in wich network treafik can find this service
+      - "traefik.docker.network=web"
+      # This is the port that traefik should proxy
+      - "traefik.http.services.n4lbe.loadbalancer.server.port=3001"
 
   mongodb:
     image: "mongo:6.0.7"
@@ -19,6 +49,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=codehq
       - MONGO_INITDB_ROOT_PASSWORD=codehq
+    networks:
+      - web
 
   rabbitmq:
     image: "rabbitmq:3.12.1-management"
@@ -31,5 +63,5 @@ services:
       - RABBITMQ_DEFAULT_PASS=codehq
 
 networks:
-  default:
-    driver: bridge
+  web:
+    external: true
