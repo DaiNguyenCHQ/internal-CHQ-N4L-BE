@@ -1,4 +1,4 @@
-import { Todo, TodoModel } from "../models/Todo";
+import { Todo, TodoModel } from '../models/Todo';
 
 export class TodoService {
   public async getAllTodos(): Promise<Todo[]> {
@@ -22,7 +22,9 @@ export class TodoService {
 
   public async updateTodo(id: string, todo: Todo): Promise<Todo | null> {
     try {
-      const updatedTodo = await TodoModel.findByIdAndUpdate(id, todo, { new: true });
+      const updatedTodo = await TodoModel.findByIdAndUpdate(id, todo, {
+        new: true,
+      });
       return updatedTodo;
     } catch (error) {
       throw new Error('Failed to update todo');
@@ -35,6 +37,15 @@ export class TodoService {
       return true;
     } catch (error) {
       throw new Error('Failed to delete todo');
+    }
+  }
+
+  public async deleteAllTodos(): Promise<boolean> {
+    try {
+      await TodoModel.deleteMany();
+      return true;
+    } catch (error) {
+      throw new Error('Failed to delete all todo');
     }
   }
 }

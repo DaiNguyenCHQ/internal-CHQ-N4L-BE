@@ -1,7 +1,5 @@
 import mongoose, { ConnectOptions } from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { logger } from "../utils/logger";
 
 export const connectDB = async (): Promise<void> => {
   try {
@@ -10,9 +8,9 @@ export const connectDB = async (): Promise<void> => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     } as ConnectOptions);
-    console.log("Connected to MongoDB");
+    logger.info("Connected to MongoDB");
   } catch (error) {
-    console.error("Failed to connect to MongoDB", error);
+    logger.error("Failed to connect to MongoDB", error);
     process.exit(1);
   }
 };
