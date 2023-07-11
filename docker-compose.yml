@@ -8,6 +8,8 @@ services:
       - "3001:3001"
     environment:
       - MONGODB_URI=mongodb://codehq:codehq@mongodb:27017/todo-app?authSource=admin&w=1
+      - PORT = "3001"
+      - CORS_ORIGIN = "http://localhost:4200"
 
   mongodb:
     image: "mongo:6.0.7"
