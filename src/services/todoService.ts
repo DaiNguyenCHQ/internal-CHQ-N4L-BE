@@ -71,4 +71,13 @@ export class TodoService {
       throw new Error('Failed to delete all todo');
     }
   }
+
+  public async getTodosByStatus(status: string): Promise<Todo[]> {
+    try {
+      const todos = await TodoModel.find({ status }).lean();
+      return todos;
+    } catch (error) {
+      throw new Error('Failed to get all todo by status');
+    }
+  }
 }
