@@ -16,7 +16,7 @@ logger.info(process.env, "environment");
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://ui.chatapp.local',
+    origin: process.env.CORS_ORIGIN || 'http://localhost:4200',
   })
 );
 
