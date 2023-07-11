@@ -54,7 +54,7 @@ export const todoRoutes = (todoService: TodoService): express.Router => {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         logger.info('DELETE - ALL COMPLETED TODOS');
-        const deleteCompletedTodos = await todoService.deleteCompltedTodos();
+        const deleteCompletedTodos = await todoService.deleteCompletedTodos();
         res.json(deleteCompletedTodos);
       } catch (error) {
         next(error);

@@ -72,7 +72,7 @@ export class TodoService {
     }
   }
 
-  public async deleteCompltedTodos(): Promise<boolean> {
+  public async deleteCompletedTodos(): Promise<boolean> {
     try {
       await TodoModel.deleteMany({ status: "completed"});
       return true;
