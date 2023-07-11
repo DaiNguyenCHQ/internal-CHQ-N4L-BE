@@ -22,3 +22,7 @@
   - run: `npm i`
   - run `tsc`
   - run `npm run start`
+
+5. NOTE FOR DEV:
+  - `docker compose up -d mongodb rabbitmq` to start these dependency services
+  - on source code: run `npm i` then `npm run dev`

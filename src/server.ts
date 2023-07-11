@@ -38,7 +38,6 @@ app.use('/api', todoRoutes(todoService));
 // Error handling middleware
 app.use(errorHandler);
 
-
 // Start the server
 app.listen(port, () => {
   logger.info(`Server running on port ${port}`);
