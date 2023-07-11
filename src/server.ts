@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from "dotenv";
 import { logger } from './utils/logger';
+import { errorHandler } from './middleware/ErrorHandler';
 import { connectDB } from './config/db';
 import { TodoService } from './services/todoService';
 import { todoRoutes } from './routes/todoRoutes';
@@ -33,12 +34,7 @@ app.get('/', (req, res) => {
 app.use('/api', todoRoutes(todoService));
 
 // Error handling middleware
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  logger.error(err);
-   // Log the error with Pino
-
-  res.status(500).json({ error: 'Internal Server Error' });
-});
+app.use(errorHandler);
 
 
 // Start the server
